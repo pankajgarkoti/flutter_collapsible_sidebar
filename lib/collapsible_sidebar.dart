@@ -212,7 +212,7 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
       alignment: Alignment.topLeft,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: widget.minWidth * 1.1),
+          padding: EdgeInsets.only(left: _currWidth * 1.1),
           child: widget.body,
         ),
         Padding(
