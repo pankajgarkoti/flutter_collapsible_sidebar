@@ -39,7 +39,7 @@ class CollapsibleSidebar extends StatefulWidget {
     this.unselectedTextColor = const Color(0xffC0C7D0),
     this.duration = const Duration(milliseconds: 500),
     this.curve = Curves.fastLinearToSlowEaseIn,
-    this.screenPadding = 4,
+    this.screenPadding = 0,
     this.showToggleButton = true,
     this.topPadding = 0,
     this.bottomPadding = 0,
@@ -212,7 +212,7 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
       alignment: Alignment.topLeft,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: _currWidth * 1.1),
+          padding: EdgeInsets.only(left: _currWidth * 1),
           child: widget.body,
         ),
         Padding(
