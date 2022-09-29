@@ -308,7 +308,7 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
       urlStream: widget.urlStream!,
       onTap: widget.onTitleTap,
       onUrlChange: (p0) {
-        debugPrint(p0);
+        // debugPrint(p0);
       },
     );
   }
@@ -379,7 +379,7 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
         _animateTo(endWidth);
       },
       onUrlChange: (p0) {
-        debugPrint(p0);
+        // debugPrint(p0);
       },
       urlStream: widget.urlStream!,
     );

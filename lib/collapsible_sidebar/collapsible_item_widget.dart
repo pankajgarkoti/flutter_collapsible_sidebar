@@ -37,7 +37,7 @@ class _CollapsibleItemWidgetState extends State<CollapsibleItemWidget> {
     super.initState();
     widget.urlStream.listen((event) {
       widget.onUrlChange!(event);
-      print(event);
+      // print(event);
     });
   }
 
