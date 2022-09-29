@@ -29,14 +29,20 @@ class CollapsibleAvatar extends StatelessWidget {
   }
 
   Widget get _avatar {
-    return ClipRRect(
-        borderRadius: BorderRadius.circular(avatarSize),
-        child: Image(
-          image: avatarImg,
-          fit: BoxFit.fill,
-          height: avatarSize,
-          width: avatarSize,
-        ));
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.white, width: 1),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(6),
+          child: Image(
+            image: avatarImg,
+            fit: BoxFit.fill,
+            height: avatarSize,
+            width: avatarSize,
+          )),
+    );
   }
 
   Widget get _initials {

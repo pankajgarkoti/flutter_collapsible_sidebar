@@ -46,6 +46,7 @@ class CollapsibleSidebar extends StatefulWidget {
     this.fitItemsToBottom = false,
     this.onTitleTap,
     this.isCollapsed = true,
+    this.urlStream,
     this.sidebarBoxShadow = const [
       BoxShadow(
         color: Colors.blue,
@@ -86,6 +87,7 @@ class CollapsibleSidebar extends StatefulWidget {
   final Curve curve;
   final VoidCallback? onTitleTap;
   final List<BoxShadow> sidebarBoxShadow;
+  final Stream<String>? urlStream;
 
   @override
   _CollapsibleSidebarState createState() => _CollapsibleSidebarState();
@@ -283,6 +285,7 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
 
   Widget get _avatar {
     return CollapsibleItemWidget(
+      url: "none",
       onHoverPointer: widget.onHoverPointer,
       padding: widget.itemPadding,
       offsetX: _offsetX,
@@ -302,7 +305,11 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
             ),
       title: widget.title,
       textStyle: _textStyle(widget.unselectedTextColor, widget.titleStyle),
+      urlStream: widget.urlStream!,
       onTap: widget.onTitleTap,
+      onUrlChange: (p0) {
+        debugPrint(p0);
+      },
     );
   }
 
@@ -316,6 +323,7 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
         textColor = widget.selectedTextColor;
       }
       return CollapsibleItemWidget(
+        url: item.url,
         onHoverPointer: widget.onHoverPointer,
         padding: widget.itemPadding,
         offsetX: _offsetX,
@@ -334,12 +342,22 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
           widget.items[_selectedItemIndex].isSelected = false;
           setState(() => _selectedItemIndex = index);
         },
+        onUrlChange: (String url) {
+          if (url == item.url) {
+            if (item.isSelected) return;
+            item.isSelected = true;
+            widget.items[_selectedItemIndex].isSelected = false;
+            setState(() => _selectedItemIndex = index);
+          }
+        },
+        urlStream: widget.urlStream!,
       );
     });
   }
 
   Widget get _toggleButton {
     return CollapsibleItemWidget(
+      url: "none",
       onHoverPointer: widget.onHoverPointer,
       padding: widget.itemPadding,
       offsetX: _offsetX,
@@ -360,6 +378,10 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
         var endWidth = _isCollapsed ? widget.minWidth : tempWidth;
         _animateTo(endWidth);
       },
+      onUrlChange: (p0) {
+        debugPrint(p0);
+      },
+      urlStream: widget.urlStream!,
     );
   }
 

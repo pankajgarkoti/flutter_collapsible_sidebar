@@ -9,6 +9,9 @@ class CollapsibleItemWidget extends StatefulWidget {
     required this.padding,
     required this.offsetX,
     required this.scale,
+    required this.url,
+    required this.urlStream,
+    required this.onUrlChange,
     this.onTap,
   });
 
@@ -18,6 +21,9 @@ class CollapsibleItemWidget extends StatefulWidget {
   final TextStyle textStyle;
   final double offsetX, scale, padding;
   final VoidCallback? onTap;
+  final Function(String)? onUrlChange;
+  final Stream<String> urlStream;
+  final String url;
 
   @override
   _CollapsibleItemWidgetState createState() => _CollapsibleItemWidgetState();
@@ -25,6 +31,15 @@ class CollapsibleItemWidget extends StatefulWidget {
 
 class _CollapsibleItemWidgetState extends State<CollapsibleItemWidget> {
   bool _underline = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.urlStream.listen((event) {
+      widget.onUrlChange!(event);
+      print(event);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
