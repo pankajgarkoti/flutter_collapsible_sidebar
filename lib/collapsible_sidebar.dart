@@ -322,35 +322,38 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
         iconColor = widget.selectedIconColor;
         textColor = widget.selectedTextColor;
       }
-      return CollapsibleItemWidget(
-        url: item.url,
-        onHoverPointer: widget.onHoverPointer,
-        padding: widget.itemPadding,
-        offsetX: _offsetX,
-        scale: _fraction,
-        leading: Icon(
-          item.icon,
-          size: widget.iconSize,
-          color: iconColor,
-        ),
-        title: item.text,
-        textStyle: _textStyle(textColor, widget.textStyle),
-        onTap: () {
-          if (item.isSelected) return;
-          item.onPressed();
-          item.isSelected = true;
-          widget.items[_selectedItemIndex].isSelected = false;
-          setState(() => _selectedItemIndex = index);
-        },
-        onUrlChange: (String url) {
-          if (url == item.url) {
+      return Tooltip(
+        message: item.text,
+        child: CollapsibleItemWidget(
+          url: item.url,
+          onHoverPointer: widget.onHoverPointer,
+          padding: widget.itemPadding,
+          offsetX: _offsetX,
+          scale: _fraction,
+          leading: Icon(
+            item.icon,
+            size: widget.iconSize,
+            color: iconColor,
+          ),
+          title: item.text,
+          textStyle: _textStyle(textColor, widget.textStyle),
+          onTap: () {
             if (item.isSelected) return;
+            item.onPressed();
             item.isSelected = true;
             widget.items[_selectedItemIndex].isSelected = false;
             setState(() => _selectedItemIndex = index);
-          }
-        },
-        urlStream: widget.urlStream!,
+          },
+          onUrlChange: (String url) {
+            if (url == item.url) {
+              if (item.isSelected) return;
+              item.isSelected = true;
+              widget.items[_selectedItemIndex].isSelected = false;
+              setState(() => _selectedItemIndex = index);
+            }
+          },
+          urlStream: widget.urlStream!,
+        ),
       );
     });
   }
