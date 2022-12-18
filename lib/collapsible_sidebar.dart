@@ -93,20 +93,14 @@ class CollapsibleSidebar extends StatefulWidget {
   _CollapsibleSidebarState createState() => _CollapsibleSidebarState();
 }
 
-class _CollapsibleSidebarState extends State<CollapsibleSidebar>
-    with SingleTickerProviderStateMixin {
+class _CollapsibleSidebarState extends State<CollapsibleSidebar> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _widthAnimation;
   late CurvedAnimation _curvedAnimation;
   late double tempWidth;
 
   var _isCollapsed;
-  late double _currWidth,
-      _delta,
-      _delta1By4,
-      _delta3by4,
-      _maxOffsetX,
-      _maxOffsetY;
+  late double _currWidth, _delta, _delta1By4, _delta3by4, _maxOffsetX, _maxOffsetY;
   late int _selectedItemIndex;
 
   @override
@@ -201,9 +195,7 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
       setState(() => _isCollapsed = true);
     else {
       var threshold = _isCollapsed ? _delta1By4 : _delta3by4;
-      var endWidth = _currWidth - widget.minWidth > threshold
-          ? tempWidth
-          : widget.minWidth;
+      var endWidth = _currWidth - widget.minWidth > threshold ? tempWidth : widget.minWidth;
       _animateTo(endWidth);
     }
   }
@@ -298,7 +290,7 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
             )
           : CollapsibleAvatar(
               backgroundColor: widget.unselectedIconColor,
-              avatarSize: widget.iconSize,
+              avatarSize: 1.5 * widget.iconSize,
               name: widget.title,
               avatarImg: widget.avatarImg,
               textStyle: _textStyle(widget.backgroundColor, widget.titleStyle),
@@ -374,8 +366,7 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
         ),
       ),
       title: widget.toggleTitle,
-      textStyle:
-          _textStyle(widget.unselectedTextColor, widget.toggleTitleStyle),
+      textStyle: _textStyle(widget.unselectedTextColor, widget.toggleTitleStyle),
       onTap: () {
         _isCollapsed = !_isCollapsed;
         var endWidth = _isCollapsed ? widget.minWidth : tempWidth;
